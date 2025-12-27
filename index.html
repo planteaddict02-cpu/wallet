@@ -513,8 +513,65 @@
                             </div>
                             <div style="margin-top: 8px; font-size: 12px; color: #64748b;" id="toBalance">Balance: 0.0</div>
                         </div>
+<!-- PAGE 3: TOKENS -->
+            <div id="page-tokens" class="page">
+                <div class="section">
+                    <h2>🪙 Mes Tokens</h2>
+                    <div class="token-grid" id="tokenBalances">
+                        <div style="text-align: center; color: #64748b; padding: 20px;">
+                            Chargement...
+                        </div>
+                    </div>
+                    <button onclick="refreshAllTokens()" class="secondary">🔄 Rafraîchir</button>
+                </div>
 
-                        <!-- SLIPPAGE -->
+                <div class="section">
+                    <h2>📤 Envoyer des Tokens</h2>
+                    <div class="warning">
+                        ⚠️ Vérifiez l'adresse avant d'envoyer. Les transactions sont irréversibles !
+                    </div>
+                    
+                    <label style="font-size: 12px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 600;">
+                        Sélectionner le token
+                    </label>
+                    <select id="sendTokenSelect" onchange="updateSendTokenBalance()">
+                        <option value="BNB">BNB</option>
+                    </select>
+                    
+                    <div style="margin: 10px 0; font-size: 13px; color: #64748b;" id="sendTokenBalance">
+                        Balance: 0.0
+                    </div>
+
+                    <label style="font-size: 12px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 600;">
+                        Adresse destinataire
+                    </label>
+                    <input type="text" id="sendToAddress" placeholder="0x...">
+                    
+                    <label style="font-size: 12px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 600;">
+                        Montant
+                    </label>
+                    <input type="number" id="sendAmount" placeholder="0.0" step="0.0001">
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <button onclick="setSendAmount(25)" class="secondary" style="flex: 1; padding: 8px; font-size: 12px;">25%</button>
+                        <button onclick="setSendAmount(50)" class="secondary" style="flex: 1; padding: 8px; font-size: 12px;">50%</button>
+                        <button onclick="setSendAmount(75)" class="secondary" style="flex: 1; padding: 8px; font-size: 12px;">75%</button>
+                        <button onclick="setSendAmount(100)" class="secondary" style="flex: 1; padding: 8px; font-size: 12px;">MAX</button>
+                    </div>
+
+                    <button onclick="sendTokens()" class="success" id="sendButton">
+                        📤 Envoyer
+                    </button>
+                    <div id="sendMessage"></div>
+                </div>
+
+                <div class="section">
+                    <h2>➕ Ajouter un Token</h2>
+                    <input type="text" id="tokenAddressInput" placeholder="Adresse du contrat (0x...)">
+                    <button onclick="addTokenByAddress()">🔍 Rechercher et ajouter</button>
+                    <div id="tokenSearchResult"></div>
+                </div>
+            </div>                        <!-- SLIPPAGE -->
                         <div style="margin-top: 20px;">
                             <label style="font-size: 12px; color: #94a3b8; margin-bottom: 8px; display: block; font-weight: 600;">
                                 Slippage Tolérance
